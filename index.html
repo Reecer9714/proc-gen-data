@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/dice-d20.svg" />
+    <title>Equipment and Actions Test</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 20px;
+      }
+      #log {
+        white-space: pre-line;
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        height: 200px;
+        overflow-y: auto;
+      }
+      button {
+        margin: 5px;
+      }
+      #container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      #user-section,
+      #target-section {
+        width: 45%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Equipment and Actions Test</h1>
+
+    <div id="container">
+      <div id="user-section">
+        <h2>User</h2>
+        <p>Name: <span id="user-name"></span></p>
+        <p>HP: <span id="user-hp"></span></p>
+        <p>Weapon: <span id="user-weapon"></span></p>
+        <table
+          id="inventory"
+          border="1"
+          style="margin-top: 10px; border-collapse: collapse"
+        >
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Weight</th>
+              <th>Value</th>
+              <th>Quantity</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p>Active Effects: <span id="user-effects">None</span></p>
+        <p>Conditions: <span id="user-conditions">None</span></p>
+        <div id="user-actions"></div>
+      </div>
+
+      <div id="target-section">
+        <h2>Enemy</h2>
+        <p>Name: <span id="target-name"></span></p>
+        <p>HP: <span id="target-hp"></span></p>
+        <p>Active Effects: <span id="target-effects">None</span></p>
+        <p>Conditions: <span id="target-conditions">None</span></p>
+        <div id="target-actions"></div>
+        <button id="reset-dummy">Reset Dummy</button>
+      </div>
+    </div>
+
+    <div id="log"></div>
+    <button id="next-round">Next Round</button>
+
+    <script type="module">
+      import { Game } from "./js/Game.js";
+
+      const game = new Game();
+      await game.initialize();
+
+      document.getElementById("reset-dummy").onclick = () => {
+        game.resetRound();
+        game.render();
+      };
+      document.getElementById("next-round").onclick = () => game.nextRound();
+
+      game.render();
+    </script>
+  </body>
+</html>
