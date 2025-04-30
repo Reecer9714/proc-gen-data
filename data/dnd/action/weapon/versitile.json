@@ -1,0 +1,30 @@
+{
+  "name": "Versitile Attack",
+  "cost": 2,
+  "target": {
+    "$ref": "../component/target.json#/single_melee_enemy"
+  },
+  "display": [
+    "{user.name} attacks {target.name}",
+    "{user.name} strikes {target.name}"
+  ],
+  "params": {
+    "damage_type": "slashing",
+    "one_handed_damage": "1d8",
+    "two_handed_damage": "1d10"
+  },
+  "effects": [
+    {
+      "conditional": ["is:one-handed"],
+      "id": "damage",
+      "type": "$damage_type",
+      "amount": "$one_handed_damage"
+    },
+    {
+      "conditional": ["is:two-handed"],
+      "id": "damage",
+      "type": "$damage_type",
+      "amount": "$two_handed_damage"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "damage",
+  "description": "Schema for damage effect",
+  "type": "object",
+  "required": ["id", "type", "amount"],
+  "properties": {
+    "id": {
+      "const": "damage"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of damage"
+    },
+    "amount": {
+      "description": "Amount of damage",
+      "oneOf": [
+        {
+          "$ref": "../param.schema.json#"
+        },
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "string",
+          "examples": [
+            "1d4",
+            "1d6",
+            "1d8",
+            "1d10",
+            "1d12",
+            "1d20",
+            "2d4",
+            "2d6"
+          ],
+          "pattern": "^([0-9]+d[0-9]+(\\+[0-9]+)?)$"
+        }
+      ]
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of damage in turns",
+      "default": 0,
+      "minimum": 0
+    }
+  }
+}

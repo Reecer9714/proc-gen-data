@@ -1,0 +1,24 @@
+{
+  "name": "Unarmed",
+  "cost": 1,
+  "display": [
+    "{user.name} punches {target.name}",
+    "{user.name} kicks {target.name}",
+    "{user.name} slaps {target.name}",
+    "{user.name} headbutts {target.name}"
+  ],
+  "target": {
+    "$ref": "../component/target.json#/single_melee_enemy"
+  },
+  "params": {
+    "damage_type": "bludgeoning",
+    "damage_amount": 1
+  },
+  "effects": [
+    {
+      "id": "damage",
+      "type": "$damage_type",
+      "amount": "$damage_amount"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Battleaxe",
+  "weight": 8,
+  "value": 150,
+  "tags": ["two-handed", "martial"],
+  "actions": [
+    {
+      "id": "weapon/versitile",
+      "params": {
+        "damage_type": "slashing",
+        "one_handed_damage": "1d8",
+        "two_handed_damage": "1d10"
+      }
+    },
+    {
+      "id": "weapon/cleave"
+    }
+  ]
+}

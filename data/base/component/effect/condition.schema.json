@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "condition",
+  "description": "Schema for condition effect",
+  "type": "object",
+  "required": ["id", "type"],
+  "properties": {
+    "id": {
+      "const": "condition"
+    },
+    "action": {
+      "type": "string",
+      "description": "Type of condition action",
+      "enum": ["apply", "remove"],
+      "default": "apply"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of condition",
+      "examples": ["blinded", "charmed", "paralyzed"]
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the condition in turns",
+      "default": 0,
+      "minimum": 0
+    }
+  }
+}

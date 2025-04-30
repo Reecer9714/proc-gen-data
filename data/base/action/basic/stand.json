@@ -1,0 +1,16 @@
+{
+  "name": "Stand Up",
+  "cost": 1,
+  "display": ["{user.name} stands up", "{user.name} gets up"],
+  "target": {
+    "$ref": "../component/target.json#/self"
+  },
+  "requires": ["condition:prone"],
+  "userEffects": [
+    {
+      "id": "condition",
+      "action": "remove",
+      "type": "prone"
+    }
+  ]
+}

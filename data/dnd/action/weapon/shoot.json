@@ -1,0 +1,28 @@
+{
+  "name": "Shoot",
+  "cost": 2,
+  "display": ["{user.name} shoots {target.name}"],
+  "target": {
+    "$ref": "../component/target.json#/single_ranged_enemy"
+  },
+  "params": {
+    "ammo_type": "ammo/arrow",
+    "damage_type": "piercing",
+    "damage_amount": "1d6"
+  },
+  "requires": ["item:$ammo_type"],
+  "effects": [
+    {
+      "id": "damage",
+      "type": "$damage_type",
+      "amount": "$damage_amount"
+    }
+  ],
+  "userEffects": [
+    {
+      "id": "inventory",
+      "action": "remove",
+      "item": "$ammo_type"
+    }
+  ]
+}

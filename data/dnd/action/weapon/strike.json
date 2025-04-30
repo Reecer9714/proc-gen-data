@@ -1,0 +1,22 @@
+{
+  "name": "Strike",
+  "display": [
+    "{user.name} strikes {target.name}",
+    "{user.name} attacks {target.name}"
+  ],
+  "cost": 2,
+  "target": {
+    "$ref": "../component/target.json#/single_melee_enemy"
+  },
+  "params": {
+    "damage_type": "slashing",
+    "damage_amount": "1d6"
+  },
+  "effects": [
+    {
+      "id": "damage",
+      "type": "$damage_type",
+      "amount": "$damage_amount"
+    }
+  ]
+}

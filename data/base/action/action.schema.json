@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "action",
+  "description": "Schema for actions",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the action",
+      "examples": ["Nick", "Stab", "Slash"],
+      "default": "filename"
+    },
+    "cost": {
+      "type": "integer",
+      "description": "The relative cost of an action. This can be mapped to an AP cost or an enum like free, bonus, action, action+bonus",
+      "examples": [0, 1, 2, 3],
+      "default": 2,
+      "minimum": 0
+    },
+    "display": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Display strings for the action",
+      "examples": [
+        "{user.name} nicks {target.name}",
+        "{user.name} cuts {target.name}"
+      ],
+      "default": []
+    },
+    "target": {
+      "$ref": "../component/target.schema.json#"
+    },
+    "effects": {
+      "$ref": "../component/effect/effects.schema.json#"
+    },
+    "params": {
+      "$ref": "../component/params.schema.json#"
+    },
+    "requires": {
+      "type": "array",
+      "description": "Requirements for the action",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Cleave",
+  "cost": 3,
+  "display": ["{user.name} cleaves through {target.name}"],
+  "target": {
+    "$ref": "../component/target.json#/single_melee_enemy"
+  },
+  "requires": ["is:two-handed"],
+  "effects": [
+    {
+      "id": "damage",
+      "type": "slashing",
+      "amount": "1d10"
+    }
+  ]
+}

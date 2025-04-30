@@ -1,0 +1,12 @@
+{
+  "name": "Shortbow",
+  "weight": 4,
+  "value": 75,
+  "ammo": "ammo/arrow",
+  "actions": [
+    {
+      "id": "weapon/shoot",
+      "params": { "ammo_type": "ammo/arrow" }
+    }
+  ]
+}

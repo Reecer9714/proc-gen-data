@@ -1,0 +1,23 @@
+{
+  "name": "Throw",
+  "cost": 2,
+  "display": [
+    "{user.name} throws a dagger at {target.name}",
+    "{user.name} hurls a dagger at {target.name}"
+  ],
+  "target": {
+    "$ref": "../component/target.json#/single_ranged_enemy"
+  },
+  "effects": [
+    {
+      "id": "damage",
+      "type": "piercing",
+      "amount": "1d4"
+    },
+    {
+      "id": "inventory",
+      "action": "remove",
+      "item": "$self"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "effect_base",
+  "description": "Schema for base effect",
+  "type": "object",
+  "properties": {
+    "conditional": {
+      "type": "array",
+      "description": "Type of condition action",
+      "default": [],
+      "items": {
+        "type": "string",
+        "pattern": "(is|not):[a-zA-Z0-9]+"
+      }
+    }
+  }
+}

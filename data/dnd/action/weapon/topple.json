@@ -1,0 +1,18 @@
+{
+  "name": "Topple",
+  "cost": 2,
+  "display": [
+    "{user.name} trips {target.name}",
+    "{user.name} knocks {target.name} to the ground"
+  ],
+  "target": {
+    "$ref": "../component/target.json#/single_melee_enemy"
+  },
+  "effects": [
+    {
+      "id": "condition",
+      "action": "add",
+      "type": "prone"
+    }
+  ]
+}

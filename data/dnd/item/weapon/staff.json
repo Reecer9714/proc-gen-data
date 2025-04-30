@@ -1,0 +1,17 @@
+{
+  "name": "Staff",
+  "weight": 5,
+  "value": 40,
+  "actions": [
+    {
+      "id": "weapon/strike",
+      "params": {
+        "damage_type": "bludgeoning",
+        "damage_amount": "1d8"
+      }
+    },
+    {
+      "id": "weapon/topple"
+    }
+  ]
+}

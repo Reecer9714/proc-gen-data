@@ -1,0 +1,1 @@
+vial of poison - can be applied to a weapon, which adds a temporary effect to an additionalEffects (because its not a new action). Then any damage effects trigger the poison. Poison triggers a "check" then appies a damage over time effect to target

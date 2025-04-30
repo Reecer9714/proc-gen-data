@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "effects",
+  "description": "Schema for an array of effects",
+  "type": "array",
+  "items": {
+    "allOf": [
+      {
+        "oneOf": [
+          {
+            "$ref": "./damage.schema.json#"
+          },
+          {
+            "$ref": "./inventory.schema.json#"
+          },
+          {
+            "$ref": "./condition.schema.json#"
+          }
+        ]
+      },
+      {
+        "$ref": "./effect_base.schema.json#"
+      }
+    ]
+  }
+}

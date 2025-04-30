@@ -1,0 +1,120 @@
+{
+  "single_melee_enemy": {
+    "type": "single",
+    "faction": "enemy",
+    "range": {
+      "type": "melee",
+      "distance": 5
+    }
+  },
+  "multiple_melee_enemy": {
+    "type": "multiple",
+    "faction": "enemy",
+    "max_amount": 3,
+    "range": {
+      "type": "melee",
+      "distance": 5
+    }
+  },
+  "single_ranged_enemy": {
+    "type": "single",
+    "faction": "enemy",
+    "range": {
+      "type": "ranged",
+      "distance": 20,
+      "max_distance": 60
+    }
+  },
+  "multiple_ranged_enemy": {
+    "type": "multiple",
+    "faction": "enemy",
+    "max_amount": 3,
+    "range": {
+      "type": "ranged",
+      "distance": 20,
+      "max_distance": 60
+    }
+  },
+  "aoe_enemy": {
+    "type": "area",
+    "faction": "enemy",
+    "shape": {
+      "type": "circle",
+      "radius": 5
+    },
+    "range": {
+      "type": "ranged",
+      "distance": 5,
+      "max_distance": 20
+    }
+  },
+  "single_melee_ally": {
+    "type": "single",
+    "faction": "ally",
+    "range": {
+      "type": "melee",
+      "distance": 5
+    }
+  },
+  "multiple_melee_ally": {
+    "type": "multiple",
+    "faction": "ally",
+    "max_amount": 3,
+    "range": {
+      "type": "melee",
+      "distance": 5
+    }
+  },
+  "single_ranged_ally": {
+    "type": "single",
+    "faction": "ally",
+    "range": {
+      "type": "ranged",
+      "distance": 20,
+      "max_distance": 60
+    }
+  },
+  "multiple_ranged_ally": {
+    "type": "multiple",
+    "faction": "ally",
+    "max_amount": 3,
+    "range": {
+      "type": "ranged",
+      "distance": 20,
+      "max_distance": 60
+    }
+  },
+  "aoe_ally": {
+    "type": "area",
+    "faction": "ally",
+    "shape": {
+      "type": "circle",
+      "radius": 5
+    },
+    "range": {
+      "type": "ranged",
+      "distance": 5,
+      "max_distance": 20
+    }
+  },
+  "self": {
+    "type": "single",
+    "faction": "self",
+    "range": {
+      "type": "melee",
+      "distance": 0
+    }
+  },
+  "self_aoe": {
+    "type": "area",
+    "faction": "self",
+    "shape": {
+      "type": "circle",
+      "radius": 5
+    },
+    "range": {
+      "type": "melee",
+      "distance": 0
+    }
+  }
+}

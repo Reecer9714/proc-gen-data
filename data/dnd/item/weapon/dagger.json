@@ -1,0 +1,17 @@
+{
+  "name": "Dagger",
+  "weight": 2,
+  "value": 50,
+  "actions": [
+    {
+      "id": "weapon/strike",
+      "params": {
+        "damage_type": "piercing",
+        "damage_amount": "1d8"
+      }
+    },
+    {
+      "id": "weapon/nick"
+    }
+  ]
+}

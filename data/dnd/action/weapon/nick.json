@@ -1,0 +1,34 @@
+{
+  "name": "Nick",
+  "cost": 1,
+  "display": [
+    "{user.name} nicks {target.name}",
+    "{user.name} cuts {target.name}"
+  ],
+  "target": {
+    "$ref": "../component/target.json#/single_melee_enemy"
+  },
+  "effects": [
+    {
+      "id": "damage",
+      "type": "slashing",
+      "amount": 1
+    },
+    {
+      "id": "status",
+      "effects": [
+        {
+          "id": "damage",
+          "type": "bleed",
+          "display": [
+            "{name} is bleeding",
+            "{name} bleeds",
+            "{name}'s wound bleeds"
+          ],
+          "amount": "1d4",
+          "duration": 2
+        }
+      ]
+    }
+  ]
+}
