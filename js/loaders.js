@@ -31,7 +31,7 @@ class Loader {
 }
 
 // Loader for equipment data
-export class EquipmentLoader extends Loader {
+export class ItemLoader extends Loader {
   static scope = "item";
 
   static async handleData(equipment) {
@@ -46,6 +46,7 @@ export class EquipmentLoader extends Loader {
       loadedActions.push(action);
     }
     equipment.actions = loadedActions;
+    equipment.tags = equipment.tags ?? []; // Ensure tags are always an array
     return equipment;
   }
 }
@@ -87,5 +88,29 @@ export class ActionLoader extends Loader {
     }
 
     return action;
+  }
+}
+
+export class EntityLoader extends Loader {
+  static scope = "entity";
+
+  static async handleData(entity) {
+    // Load actions
+    const loadedItems = [];
+    for (const itemId of entity.equipment ?? []) {
+      let action = await ItemLoader.load(itemId, entity.module);
+      loadedItems.push(action);
+    }
+    entity.equipment = loadedItems;
+    entity.inventory = entity.inventory
+      ? await Promise.all(
+          entity.inventory.map(async (item) => {
+            item.item = await ItemLoader.load(item.item, entity.module);
+            return item;
+          })
+        )
+      : undefined;
+
+    return entity;
   }
 }

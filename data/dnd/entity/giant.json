@@ -1,0 +1,7 @@
+{
+  "name": "Giant",
+  "hp": "5d10",
+  "cr": 7,
+  "equipment": ["weapon/greatclub", "armor/leather"],
+  "inventory": []
+}

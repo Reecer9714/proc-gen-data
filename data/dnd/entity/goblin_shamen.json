@@ -1,0 +1,12 @@
+{
+  "name": "Goblin Shaman",
+  "hp": "2d8",
+  "cr": 1,
+  "equipment": ["weapon/staff", "armor/robe"],
+  "inventory": [{ "item": "spellbook", "quantity": 1 }],
+  "actions": [
+    {
+      "id": "spell/cure_wounds"
+    }
+  ]
+}

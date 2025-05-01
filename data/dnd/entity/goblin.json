@@ -2,7 +2,25 @@
   "name": "Goblin",
   "hp": "2d6",
   "cr": 0.25,
-  "equipment": ["weapon/dagger", "weapon/shortbow"],
-  "inventory": [{ "item": "ammo/arrow", "quantity": "2d10" }],
+  "loadouts": [
+    {
+      "equipment": {
+        "armor": ["armor/leather"],
+        "weapon": ["weapon/dagger"]
+      }
+    },
+    {
+      "equipment": {
+        "weapon": ["weapon/shortbow"]
+      },
+      "inventory": [{ "item": "ammo/arrow", "quantity": "2d10" }]
+    }
+  ],
+  "inventory": [],
+  "treasure": [
+    { "item": "currency/gold", "quantity": "1d6", "chance": 50 },
+    { "item": "currency/silver", "quantity": "1d6", "chance": 50 },
+    { "item": "currency/copper", "quantity": "1d6", "chance": 50 }
+  ],
   "future": "item as weapon/shortbow:ammo"
 }

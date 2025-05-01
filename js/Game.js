@@ -1,5 +1,5 @@
 import { log, formatText, randomChoice } from "./utils.js";
-import { EquipmentLoader } from "./loaders.js";
+import { ItemLoader, EntityLoader } from "./loaders.js";
 import { Entity } from "./Entity.js";
 import { updateUI } from "./ui.js";
 
@@ -7,31 +7,13 @@ export class Game {
   constructor() {}
 
   async initialize() {
-    const dagger = await EquipmentLoader.load("weapon/dagger");
-    const staff = await EquipmentLoader.load("weapon/staff");
-    const shortbow = await EquipmentLoader.load("weapon/shortbow");
-    const battleaxe = await EquipmentLoader.load("weapon/battleaxe");
-    const arrow = await EquipmentLoader.load("ammo/arrow");
+    const dagger = await ItemLoader.load("weapon/dagger");
+    const staff = await ItemLoader.load("weapon/staff");
+    const shortbow = await ItemLoader.load("weapon/shortbow");
+    const battleaxe = await ItemLoader.load("weapon/battleaxe");
+    const arrow = await ItemLoader.load("ammo/arrow");
 
-    this.enemies = [
-      { name: "Training Dummy", hp: "3d6", equipment: [] },
-      {
-        name: "Goblin",
-        hp: "2d6",
-        equipment: [dagger, shortbow],
-        inventory: [{ item: arrow, quantity: arrow.maxQuantity }],
-      },
-      { name: "Orc", hp: "3d8", equipment: [battleaxe] },
-      {
-        name: "Skeleton",
-        hp: "2d8",
-        equipment: [shortbow],
-        inventory: [{ item: arrow, quantity: arrow.maxQuantity }],
-      },
-      { name: "Giant", hp: "5d10" },
-      { name: "Troll", hp: "4d10" },
-      { name: "Dragon", hp: "5d12" },
-    ];
+    this.enemies = ["training_dummy", "goblin", "skeleton", "giant"];
 
     await Entity.initializeBaseActions();
     this.hero = new Entity("Hero", 10);
@@ -40,18 +22,22 @@ export class Game {
 
     this.enemy = new Entity("Training Dummy", 20);
 
-    this.hero.addItemsToInventory([dagger, staff, shortbow, battleaxe]); // Use Entity's method to add items
+    this.hero.addItemsToInventory([
+      dagger,
+      dagger,
+      staff,
+      shortbow,
+      battleaxe,
+      await ItemLoader.load("armor/leather"),
+    ]); // Use Entity's method to add items
     this.hero.inventory.addItem(arrow, 30);
-    this.hero.inventory.addItem(
-      await EquipmentLoader.load("currency/gold"),
-      20
-    );
+    this.hero.inventory.addItem(await ItemLoader.load("currency/gold"), 20);
   }
 
   // Create a new enemy for the next round
-  resetRound() {
+  async resetRound() {
     log("A new foe appears!");
-    const randomEnemy = randomChoice(this.enemies);
+    const randomEnemy = await EntityLoader.load(randomChoice(this.enemies));
     this.enemy = new Entity(randomEnemy.name, randomEnemy.hp);
     if (randomEnemy.equipment) {
       this.enemy.addItemsToInventory(randomEnemy.equipment);

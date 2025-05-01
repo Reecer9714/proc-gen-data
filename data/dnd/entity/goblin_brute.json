@@ -1,0 +1,7 @@
+{
+  "name": "Goblin Brute",
+  "hp": "3d8",
+  "cr": 0.5,
+  "equipment": ["weapon/shortsword", "armor/leather"],
+  "inventory": []
+}
