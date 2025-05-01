@@ -106,6 +106,14 @@ export class Entity {
         }
         if (effect.action === "remove") {
           this.inventory.removeItem(effect.item);
+          // if the item is equipped, unequip it
+          const slot = Object.values(this.equipmentSlots).find(
+            // TODO item.id is not specific enough
+            (slot) => slot.item && slot.item.id === effect.item
+          );
+          if (slot) {
+            this.unequipItem(slot.name);
+          }
           return {
             context: {},
             messages: [`Removed item from inventory: ${effect.item}`],

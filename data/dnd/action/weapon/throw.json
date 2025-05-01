@@ -8,16 +8,23 @@
   "target": {
     "$ref": "../component/target.json#/single_ranged_enemy"
   },
+  "params": {
+    "ammo_type": "null",
+    "damage_type": "piercing",
+    "damage_amount": "1d4"
+  },
   "effects": [
     {
       "id": "damage",
-      "type": "piercing",
-      "amount": "1d4"
-    },
+      "type": "$damage_type",
+      "amount": "$damage_amount"
+    }
+  ],
+  "userEffects": [
     {
       "id": "inventory",
       "action": "remove",
-      "item": "$self"
+      "item": "$ammo_type"
     }
   ]
 }

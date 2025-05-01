@@ -2,6 +2,7 @@
   "name": "Dagger",
   "weight": 2,
   "value": 50,
+  "tags": ["finesse", "light", "thrown"],
   "actions": [
     {
       "id": "weapon/strike",
@@ -12,6 +13,14 @@
     },
     {
       "id": "weapon/nick"
+    },
+    {
+      "id": "weapon/throw",
+      "params": {
+        "ammo_type": "weapon/dagger",
+        "damage_type": "piercing",
+        "damage_amount": "1d4"
+      }
     }
   ]
 }
