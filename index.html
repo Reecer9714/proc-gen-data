@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/dice-d20.svg" />
+    <link rel="modulepreload" href="./js/Game.js" />
     <title>Equipment and Actions Test</title>
     <style>
       body {
@@ -80,6 +81,7 @@
 
       const game = new Game();
       await game.initialize();
+      window.game = game; // For debugging
 
       document.getElementById("reset-dummy").onclick = () => {
         game.resetRound();
