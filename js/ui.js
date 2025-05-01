@@ -72,17 +72,29 @@ function createInventoryRow(
 
   const actionsCell = row.querySelector("td:last-child");
 
-  if (item.id.includes("weapon")) {
+  if (item.id.includes("weapon") || item.id.includes("armor")) {
+    const slotType = item.id.includes("weapon") ? "weapon" : "armor";
     if (equiped) {
-      actionsCell.appendChild(createButton("Unequip", () => onUnequip(item)));
-    } else {
-      actionsCell.appendChild(createButton("Equip", () => onEquip(item)));
-    }
-
-    if (item.tags?.includes("two-handed")) {
       actionsCell.appendChild(
-        createButton("Equip (2H)", () => onEquipTwoHanded(item))
+        createButton("Unequip", () => onUnequip(slotType, item))
       );
+    } else {
+      if (
+        !item.tags?.includes("two-handed") ||
+        item.tags?.includes("versitile")
+      ) {
+        actionsCell.appendChild(
+          createButton("Equip", () => onEquip(slotType, item))
+        );
+      }
+      if (
+        item.tags?.includes("two-handed") ||
+        item.tags?.includes("versitile")
+      ) {
+        actionsCell.appendChild(
+          createButton("Equip (2H)", () => onEquipTwoHanded(slotType, item))
+        );
+      }
     }
   }
 
@@ -97,28 +109,19 @@ function updateUserInventory(game, user) {
     const { item } = slot;
     const row = createInventoryRow(
       slot,
-      user.weapon?.id === item.id,
-      (item) => {
-        user.weapon = item;
-        user.facts.add("one-handed");
-        user.facts.add("unarmed");
-        user.facts.delete("two-handed");
+      user.isEquipped(item.id),
+      (slotType, item) => {
+        user.equipItem(slotType, item, [...item.tags, "one-handed"]);
         log(`Hero equipped the ${item.name}!`);
         game.render();
       },
-      (item) => {
-        user.weapon = item;
-        user.facts.add("two-handed");
-        user.facts.delete("one-handed");
-        user.facts.delete("unarmed");
+      (slotType, item) => {
+        user.equipItem(slotType, item, [...item.tags, "two-handed"]);
         log(`Hero equipped the ${item.name} two-handed!`);
         game.render();
       },
-      (item) => {
-        user.weapon = null;
-        user.facts.add("unarmed");
-        user.facts.delete("one-handed");
-        user.facts.delete("two-handed");
+      (slotType, item) => {
+        user.unequipItem(slotType);
         log(`Hero unequipped the ${item.name}!`);
         game.render();
       }

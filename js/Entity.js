@@ -2,12 +2,43 @@ import { log, formatText, randomChoice, rollDice } from "./utils.js";
 import { ActionLoader } from "./loaders.js";
 import { Inventory } from "./Inventory.js";
 
+class EquipmentSlot {
+  constructor(name) {
+    this.name = name;
+    this.item = null;
+    this.facts = new Set();
+  }
+
+  equip(item, facts = []) {
+    if (this.item) {
+      this.unequip(); // Unequip current item if any
+    }
+    this.item = item;
+    this.facts = new Set(facts);
+    return `Equipped ${this.name}: ${item.name}`;
+  }
+
+  unequip() {
+    if (this.item) {
+      const unequippedItem = this.item;
+      this.item = null;
+      this.facts.clear();
+      return `Unequipped ${this.name}: ${unequippedItem.name}`;
+    }
+    return `No ${this.name} to unequip.`;
+  }
+}
+
 export class Entity {
   constructor(name, hp) {
     this.name = name;
     this.hp = rollDice(hp); // Roll for HP
     this.maxHp = hp; // Store max HP for reference
-    this.weapon = null;
+    this.equipmentSlots = {
+      weapon: new EquipmentSlot("weapon"),
+      offHand: new EquipmentSlot("offHand"),
+      armor: new EquipmentSlot("armor"),
+    };
     this.inventory = new Inventory(); // Inventory now stores items with quantities
     this.activeEffects = [];
     this.conditions = new Set();
@@ -107,8 +138,8 @@ export class Entity {
         return this.resolveConditional(action.requires);
       });
 
-    const equipmentActions = this.weapon
-      ? filterActions(this.weapon.actions)
+    const equipmentActions = this.equipmentSlots.weapon.item
+      ? filterActions(this.equipmentSlots.weapon.item.actions)
       : [];
     const baseActions = filterActions(Entity.baseActions);
 
@@ -150,6 +181,41 @@ export class Entity {
           return false;
       }
     });
+  }
+
+  equipItem(slotName, item, facts = []) {
+    if (!this.equipmentSlots[slotName]) {
+      throw new Error(`Invalid equipment slot: ${slotName}`);
+    }
+    const message = this.equipmentSlots[slotName].equip(item, facts);
+    facts.forEach((fact) => this.facts.add(fact)); // Add item facts
+    return message;
+  }
+
+  unequipItem(slotName) {
+    if (!this.equipmentSlots[slotName]) {
+      throw new Error(`Invalid equipment slot: ${slotName}`);
+    }
+    const slot = this.equipmentSlots[slotName];
+    const message = slot.unequip();
+    slot.facts.forEach((fact) => this.facts.delete(fact)); // Remove item facts
+    return message;
+  }
+
+  isEquipped(itemId) {
+    return Object.values(this.equipmentSlots).some(
+      (slot) => slot.item && slot.item.id === itemId
+    );
+  }
+
+  getEquippedItems() {
+    return Object.entries(this.equipmentSlots).reduce(
+      (acc, [slotName, slot]) => {
+        acc[slotName] = slot.item ? slot.item.name : "None";
+        return acc;
+      },
+      {}
+    );
   }
 }
 // Static property for baseActions

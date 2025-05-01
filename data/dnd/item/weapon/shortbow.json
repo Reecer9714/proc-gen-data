@@ -3,6 +3,7 @@
   "weight": 4,
   "value": 75,
   "ammo": "ammo/arrow",
+  "tags": ["ranged", "two-handed"],
   "actions": [
     {
       "id": "weapon/shoot",

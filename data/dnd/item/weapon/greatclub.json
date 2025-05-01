@@ -1,0 +1,15 @@
+{
+  "name": "Great Club",
+  "weight": 10,
+  "value": 20,
+  "tags": ["two-handed"],
+  "actions": [
+    {
+      "id": "weapon/strike",
+      "params": {
+        "damage_type": "bludgeoning",
+        "damage_amount": "1d8"
+      }
+    }
+  ]
+}

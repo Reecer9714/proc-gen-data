@@ -2,7 +2,7 @@
   "name": "Battleaxe",
   "weight": 8,
   "value": 150,
-  "tags": ["two-handed", "martial"],
+  "tags": ["versitile", "martial"],
   "actions": [
     {
       "id": "weapon/versitile",
