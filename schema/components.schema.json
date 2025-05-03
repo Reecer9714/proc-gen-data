@@ -1,0 +1,81 @@
+{
+  "definitions": {
+    "param": {
+      "type": "string",
+      "pattern": "^\\$([a-zA-Z0-9_]+)$",
+      "examples": ["$self"]
+    },
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^([a-zA-Z0-9_]+)$": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        }
+      },
+      "examples": ["$self"]
+    },
+    "diceNotation": {
+      "type": "string",
+      "description": "Dice notation for damage",
+      "examples": ["1d4", "1d6", "1d8", "1d10", "1d12", "1d20", "2d4", "2d6"],
+      "pattern": "^([0-9]+d[0-9]+(\\+[0-9]+)?)$"
+    },
+    "dataId": {
+      "type": "string",
+      "description": "ID of the data",
+      "pattern": "^([a-zA-Z0-9]+(\\/[a-zA-Z0-9]+)*)$",
+      "examples": ["weapon.battleaxe", "armor.chainmail"]
+    },
+    "itemRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/dataId"
+        },
+        "quantity": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "description": "Amount of the item",
+              "default": 1,
+              "minimum": 1
+            },
+            {
+              "$ref": "#/definitions/diceNotation"
+            }
+          ]
+        }
+      }
+    },
+    "actionRef": {
+      "type": "array",
+      "description": "References to actions that can be performed with the equipment.",
+      "items": {
+        "type": "object",
+        "description": "Additonal properties are merged into the source action.",
+        "required": ["id"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the action",
+            "pattern": "^([a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$",
+            "examples": ["weapon.slash", "weapon.cleave"]
+          },
+          "params": {
+            "$ref": "#/definitions/params"
+          }
+        }
+      },
+      "default": []
+    }
+  }
+}

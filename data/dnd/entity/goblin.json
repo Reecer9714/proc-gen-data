@@ -1,26 +1,30 @@
 {
   "name": "Goblin",
-  "hp": "2d6",
-  "cr": 0.25,
+  "level": 2,
+  "hd": "d6",
+  "role": ["ambusher", "skirmisher"],
   "loadouts": [
     {
-      "equipment": {
-        "armor": ["armor/leather"],
-        "weapon": ["weapon/dagger"]
-      }
+      "role": ["skirmisher"],
+      "equipment": ["armor/leather", "weapon/dagger"]
     },
     {
-      "equipment": {
-        "weapon": ["weapon/shortbow"]
-      },
+      "role": ["ambusher"],
+      "equipment": ["weapon/shortbow"],
       "inventory": [{ "item": "ammo/arrow", "quantity": "2d10" }]
     }
   ],
   "inventory": [],
   "treasure": [
-    { "item": "currency/gold", "quantity": "1d6", "chance": 50 },
-    { "item": "currency/silver", "quantity": "1d6", "chance": 50 },
-    { "item": "currency/copper", "quantity": "1d6", "chance": 50 }
+    { "item": "currency/gold", "quantity": "1d6", "chance": 0.5 },
+    { "item": "currency/silver", "quantity": "1d6", "chance": 0.5 },
+    { "item": "currency/copper", "quantity": "1d6", "chance": 0.5 }
+  ],
+  "harvest": [
+    { "item": "goblin_ear", "quantity": 1, "chance": 0.5 },
+    { "item": "goblin_ear", "quantity": 1, "chance": 0.5 },
+    { "item": "goblin_tooth", "quantity": 1, "chance": 0.5 },
+    { "item": "goblin_tooth", "quantity": 1, "chance": 0.5 }
   ],
   "future": "item as weapon/shortbow:ammo"
 }

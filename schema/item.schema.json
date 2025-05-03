@@ -1,0 +1,32 @@
+{
+  "title": "Item",
+  "description": "Schema for item",
+  "allOf": [
+    {
+      "$ref": "./simple_item.schema.json#"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "References to actions that can be performed with the equipment.",
+          "items": {
+            "type": "object",
+            "description": "Additonal properties are merged into the source action.",
+            "required": ["id"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "../components.schema.json#/definitions/dataId"
+              },
+              "params": {
+                "$ref": "../components.schema.json#/definitions/params"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

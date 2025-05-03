@@ -1,0 +1,31 @@
+{
+  "title": "Simple Item",
+  "description": "Schema for a simple item",
+  "type": "object",
+  "required": ["name", "weight", "value"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the item",
+      "examples": ["Sword", "Shield", "Bow"]
+    },
+    "weight": {
+      "type": "number",
+      "description": "The relative weight of the item",
+      "examples": [1.0, 2.5, 0.75],
+      "default": 1
+    },
+    "value": {
+      "type": "number",
+      "description": "The relative value of the item",
+      "examples": [10, 50, 100],
+      "default": 1
+    },
+    "maxQuantity": {
+      "type": "integer",
+      "description": "The maximum quantity of the item that can be held in a single slot",
+      "examples": [1, 10, 100],
+      "minimum": 1
+    }
+  }
+}

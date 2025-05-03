@@ -1,0 +1,123 @@
+{
+  "type": "object",
+  "required": ["name", "hd", "level"],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "hd": {
+      "type": "string",
+      "description": "Hit dice of the entity, to be scaled with level",
+      "enum": ["d4", "d6", "d8", "d10", "d12", "d20"]
+    },
+    "level": {
+      "type": "number",
+      "description": "Level rating of the entity",
+      "default": 0,
+      "minimum": 1
+    },
+    "roles": {
+      "type": "array",
+      "description": "Roles of the entity",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ambusher",
+          "artillery",
+          "brute",
+          "controller",
+          "defender",
+          "leader",
+          "lurker",
+          "minion",
+          "skirmisher",
+          "soldier",
+          "striker",
+          "support"
+        ]
+      },
+      "default": []
+    },
+    "loadouts": {
+      "type": "array",
+      "description": "Possible loadouts of the entity",
+      "items": {
+        "type": "object",
+        "properties": {
+          "equipment": {
+            "$ref": "#/definitions/equipmentList"
+          },
+          "inventory": {
+            "$ref": "#/definitions/inventoryList"
+          }
+        },
+        "required": ["equipment"]
+      },
+      "default": []
+    },
+    "actions": {
+      "type": "array",
+      "description": "References to actions that can be performed with the equipment.",
+      "items": {
+        "$ref": "./components.schema.json#/definitions/actionRef"
+      },
+      "default": []
+    },
+    "inventory": {
+      "$ref": "#/definitions/inventoryList",
+      "description": "Items always carried by the entity"
+    },
+    "equipment": {
+      "$ref": "#/definitions/equipmentList",
+      "description": "Items always equipped by the entity"
+    },
+    "treasure": {
+      "$ref": "#/definitions/lootTable",
+      "description": "Items dropped upon defeat"
+    },
+    "harvest": {
+      "$ref": "#/definitions/lootTable",
+      "description": "Items that can be harvested from the entity"
+    }
+  },
+  "definitions": {
+    "lootTable": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "./components.schema.json#/definitions/itemRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "chance": {
+                "type": "number",
+                "description": "Chance of the loot table",
+                "default": 1,
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    "inventoryList": {
+      "type": "array",
+      "description": "Inventory of the entity",
+      "items": {
+        "$ref": "./components.schema.json#/definitions/itemRef"
+      },
+      "default": []
+    },
+    "equipmentList": {
+      "type": "array",
+      "description": "Equipment of the entity",
+      "items": {
+        "$ref": "./components.schema.json#/definitions/dataId"
+      },
+      "default": []
+    }
+  }
+}

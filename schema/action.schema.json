@@ -31,19 +31,23 @@
       "default": []
     },
     "target": {
-      "$ref": "../component/target.schema.json#"
+      "$ref": "./target.schema.json#"
     },
     "effects": {
-      "$ref": "../component/effect/effects.schema.json#"
+      "$ref": "effect/effects.schema.json#"
+    },
+    "userEffects": {
+      "$ref": "effect/effects.schema.json#"
     },
     "params": {
-      "$ref": "../component/params.schema.json#"
+      "$ref": "components.schema.json#/definitions/params"
     },
     "requires": {
       "type": "array",
       "description": "Requirements for the action",
       "items": {
-        "type": "string"
+        "type": "string",
+        "pattern": "^(is|condition|item):\\$?[a-zA-Z0-9_\\-]+$"
       },
       "default": []
     }

@@ -1,0 +1,22 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/data/*/action/**/*.json",
+            ],
+            "url": "/schema/action.schema.json"
+        },
+        {
+            "fileMatch": [
+                "/data/*/entity/**/*.json",
+            ],
+            "url": "/schema/entity.schema.json"
+        },
+        {
+            "fileMatch": [
+                "/data/*/item/**/*.json",
+            ],
+            "url": "/schema/item.schema.json"
+        },
+    ]
+}

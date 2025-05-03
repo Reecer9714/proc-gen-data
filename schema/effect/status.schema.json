@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "status",
+  "description": "Schema for status effect",
+  "type": "object",
+  "required": ["id", "duration"],
+  "properties": {
+    "id": {
+      "const": "status"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of status in turns",
+      "default": 0,
+      "minimum": 0
+    },
+    "effects": {
+      "$ref": "./effects.schema.json#",
+      "description": "Effects of the status"
+    },
+    "userEffects": {
+      "$ref": "./effects.schema.json#",
+      "description": "User effects of the status"
+    }
+  }
+}

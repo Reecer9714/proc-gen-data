@@ -1,0 +1,11 @@
+{
+  "currency/gold": { "value": 1, "weight": 0.02 },
+  "currency/silver": { "value": 0.1, "weight": 0.02 },
+  "currency/copper": { "value": 0.01, "weight": 0.02 },
+  "currency/platinum": { "value": 10, "weight": 0.02 },
+
+  "ammo/arrow": { "value": 0.01, "weight": 0.02, "maxQuantity": 20 },
+  "ammo/bolt": { "value": 0.01, "weight": 0.02, "maxQuantity": 20 },
+  "ammo/stone": { "value": 0.01, "weight": 0.02, "maxQuantity": 20 },
+  "ammo/dart": { "value": 0.01, "weight": 0.02, "maxQuantity": 20 }
+}

@@ -16,6 +16,7 @@
     },
     {
       "id": "status",
+      "duration": 2,
       "effects": [
         {
           "id": "damage",
@@ -25,8 +26,7 @@
             "{name} bleeds",
             "{name}'s wound bleeds"
           ],
-          "amount": "1d4",
-          "duration": 2
+          "amount": "1d4"
         }
       ]
     }

@@ -15,6 +15,9 @@
           },
           {
             "$ref": "./condition.schema.json#"
+          },
+          {
+            "$ref": "./status.schema.json#"
           }
         ]
       },
