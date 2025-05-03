@@ -79,10 +79,7 @@ function createInventoryRow(
         createButton("Unequip", () => onUnequip(slotType, item))
       );
     } else {
-      if (
-        item.tags?.includes("one-handed") ||
-        item.tags?.includes("versitile")
-      ) {
+      if (!item.tags?.includes("two-handed")) {
         actionsCell.appendChild(
           createButton("Equip", () => onEquip(slotType, item))
         );

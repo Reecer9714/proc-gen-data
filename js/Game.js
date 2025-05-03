@@ -7,6 +7,9 @@ export class Game {
   constructor() {}
 
   async initialize() {
+    await Entity.initializeBaseActions();
+    await ItemLoader.loadSimpleItems();
+
     const dagger = await ItemLoader.load("weapon/dagger");
     const staff = await ItemLoader.load("weapon/staff");
     const shortbow = await ItemLoader.load("weapon/shortbow");
@@ -15,7 +18,6 @@ export class Game {
 
     this.enemies = ["training_dummy", "goblin", "skeleton", "giant"];
 
-    await Entity.initializeBaseActions();
     this.hero = new Entity("Hero", 10);
     this.hero.attributes = { strength: 10 };
     this.hero.weapon = null;
@@ -64,7 +66,10 @@ export class Game {
     log("A new foe appears!");
     this.lootDrops = []; // Reset loot drops for the next round
     const randomEnemy = await EntityLoader.load(randomChoice(this.enemies));
-    this.enemy = new Entity(randomEnemy.name, randomEnemy.hp);
+    this.enemy = new Entity(
+      randomEnemy.name,
+      `${randomEnemy.level}${randomEnemy.hd}`
+    );
     if (randomEnemy.equipment) {
       this.enemy.addItemsToInventory(randomEnemy.equipment);
       this.enemy.weapon = randomChoice(randomEnemy.equipment);

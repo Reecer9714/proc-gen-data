@@ -1,5 +1,3 @@
-const actionCache = new Map(); // Cache for loaded actions
-
 // Loader base class that enforces caching
 class Loader {
   static cache = new Map(); // Single shared cache for all loaders
@@ -33,6 +31,32 @@ class Loader {
 // Loader for equipment data
 export class ItemLoader extends Loader {
   static scope = "item";
+
+  static async loadSimpleItems(module = "dnd") {
+    const response = await fetch(`data/${module}/simple_items.json`);
+    if (!response.ok) {
+      throw new Error(`Failed to load simple items`);
+    }
+    const json = await response.json();
+    return Object.keys(json).map((itemId) => {
+      // default weight and value to 1 if not set
+      const simpleItem = {
+        ...{ weight: 1, value: 1 },
+        ...json[itemId],
+        id: itemId,
+        module: module,
+        // Change itemId to sentence case
+
+        name: itemId
+          .split("/")
+          .pop()
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (c) => c.toUpperCase()),
+        tags: ["simple"],
+      };
+      this.cache.set(`${this.name}:${module}:${itemId}:[]`, simpleItem);
+    });
+  }
 
   static async handleData(equipment) {
     // Load actions
