@@ -22,7 +22,12 @@
         ]
       },
       {
-        "$ref": "./effect_base.schema.json#"
+        "type": "object",
+        "properties": {
+          "conditional": {
+            "$ref": "../components.schema.json#/definitions/conditional"
+          }
+        }
       }
     ]
   }

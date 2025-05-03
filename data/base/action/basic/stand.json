@@ -5,7 +5,7 @@
   "target": {
     "$ref": "../component/target.json#/self"
   },
-  "requires": ["condition:prone"],
+  "conditional": ["condition:prone"],
   "userEffects": [
     {
       "id": "condition",

@@ -140,10 +140,10 @@ export class Entity {
   getActions() {
     const filterActions = (actions) =>
       actions.filter((action) => {
-        if (!action.requires) {
+        if (!action.conditional) {
           return true; // No requirements, so include the action
         }
-        return this.resolveConditional(action.requires);
+        return this.resolveConditional(action.conditional);
       });
 
     const equipmentActions = this.equipmentSlots.weapon.item

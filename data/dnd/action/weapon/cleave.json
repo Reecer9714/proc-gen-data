@@ -5,7 +5,7 @@
   "target": {
     "$ref": "../component/target.json#/single_melee_enemy"
   },
-  "requires": ["is:two-handed"],
+  "conditional": ["is:two-handed"],
   "effects": [
     {
       "id": "damage",

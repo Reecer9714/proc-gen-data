@@ -22,6 +22,17 @@
       },
       "examples": ["$self"]
     },
+    "conditional": {
+      "type": "array",
+      "briefDescription": "Conditional requirements",
+      "description": "is: check if fact is true, not: check if fact is false, condition: check if condition is present, item: check if item is present",
+      "examples": ["is:fact", "not:fact", "condition:prone", "item:ammo/arrow"],
+      "default": [],
+      "items": {
+        "type": "string",
+        "pattern": "^(is|not|condition|item):\\$?[a-zA-Z0-9_\\-\\/]+$"
+      }
+    },
     "diceNotation": {
       "type": "string",
       "description": "Dice notation for damage",

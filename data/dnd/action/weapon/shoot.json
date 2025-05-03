@@ -10,7 +10,7 @@
     "damage_type": "piercing",
     "damage_amount": "1d6"
   },
-  "requires": ["item:$ammo_type"],
+  "conditional": ["item:$ammo_type"],
   "effects": [
     {
       "id": "damage",

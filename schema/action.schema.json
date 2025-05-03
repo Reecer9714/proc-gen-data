@@ -34,22 +34,16 @@
       "$ref": "./target.schema.json#"
     },
     "effects": {
-      "$ref": "effect/effects.schema.json#"
+      "$ref": "./effect/effects.schema.json#"
     },
     "userEffects": {
-      "$ref": "effect/effects.schema.json#"
+      "$ref": "./effect/effects.schema.json#"
     },
     "params": {
-      "$ref": "components.schema.json#/definitions/params"
+      "$ref": "./components.schema.json#/definitions/params"
     },
-    "requires": {
-      "type": "array",
-      "description": "Requirements for the action",
-      "items": {
-        "type": "string",
-        "pattern": "^(is|condition|item):\\$?[a-zA-Z0-9_\\-]+$"
-      },
-      "default": []
+    "conditional": {
+      "$ref": "./components.schema.json#/definitions/conditional"
     }
   }
 }
