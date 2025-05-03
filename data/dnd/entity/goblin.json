@@ -6,7 +6,7 @@
   "loadouts": [
     {
       "role": ["skirmisher"],
-      "equipment": ["armor/leather", "weapon/dagger"]
+      "equipment": ["armor/leather", "weapon/shortsword"]
     },
     {
       "role": ["ambusher"],

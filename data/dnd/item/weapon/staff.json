@@ -2,6 +2,7 @@
   "name": "Staff",
   "weight": 5,
   "value": 40,
+  "tags": ["two-handed"],
   "actions": [
     {
       "id": "weapon/strike",

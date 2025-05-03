@@ -80,7 +80,7 @@ function createInventoryRow(
       );
     } else {
       if (
-        !item.tags?.includes("two-handed") ||
+        item.tags?.includes("one-handed") ||
         item.tags?.includes("versitile")
       ) {
         actionsCell.appendChild(

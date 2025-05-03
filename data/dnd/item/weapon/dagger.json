@@ -2,7 +2,7 @@
   "name": "Dagger",
   "weight": 2,
   "value": 50,
-  "tags": ["finesse", "light", "thrown"],
+  "tags": ["one-handed", "finesse", "light", "thrown"],
   "actions": [
     {
       "id": "weapon/strike",

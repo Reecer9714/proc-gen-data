@@ -1,7 +1,9 @@
 {
   "name": "Skeleton",
-  "hp": "2d8",
-  "cr": 0.5,
+  "hd": "d8",
+  "level": 2,
+  "tags": ["undead"],
+  "roles": ["artillery"],
   "equipment": ["weapon/shortbow"],
   "inventory": [{ "item": "ammo/arrow", "quantity": "2d10" }]
 }

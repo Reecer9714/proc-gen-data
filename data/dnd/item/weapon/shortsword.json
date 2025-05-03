@@ -1,0 +1,15 @@
+{
+  "name": "Shortsword",
+  "weight": 8,
+  "value": 100,
+  "tags": ["one-handed", "light"],
+  "actions": [
+    {
+      "id": "weapon/strike",
+      "params": {
+        "damage_type": "slashing",
+        "damage_amount": "1d6"
+      }
+    }
+  ]
+}
