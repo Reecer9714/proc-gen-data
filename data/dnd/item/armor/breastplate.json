@@ -1,0 +1,7 @@
+{
+  "name": "Breastplate",
+  "weight": 20,
+  "value": 400,
+  "tags": ["medium"],
+  "armor": 4
+}

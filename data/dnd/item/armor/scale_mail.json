@@ -1,0 +1,7 @@
+{
+  "name": "Scale Mail",
+  "weight": 45,
+  "value": 50,
+  "tags": ["medium"],
+  "armor": 4
+}

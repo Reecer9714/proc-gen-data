@@ -1,0 +1,7 @@
+{
+  "name": "Hide Armor",
+  "weight": 12,
+  "value": 10,
+  "tags": ["medium"],
+  "armor": 2
+}

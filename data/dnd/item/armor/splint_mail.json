@@ -1,0 +1,7 @@
+{
+  "name": "Splint Mail",
+  "weight": 60,
+  "value": 200,
+  "tags": ["heavy"],
+  "armor": 7
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Chain Mail",
+  "weight": 55,
+  "value": 75,
+  "tags": ["heavy"],
+  "armor": 6
+}

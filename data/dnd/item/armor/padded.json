@@ -1,0 +1,7 @@
+{
+  "name": "Padded Armor",
+  "weight": 8,
+  "value": 5,
+  "tags": ["light"],
+  "armor": 1
+}

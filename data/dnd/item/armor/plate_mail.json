@@ -1,0 +1,7 @@
+{
+  "name": "Plate Mail",
+  "weight": 65,
+  "value": 1500,
+  "tags": ["heavy"],
+  "armor": 8
+}
