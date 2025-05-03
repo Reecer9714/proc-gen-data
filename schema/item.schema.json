@@ -18,10 +18,10 @@
             "additionalProperties": false,
             "properties": {
               "id": {
-                "$ref": "../components.schema.json#/definitions/dataId"
+                "$ref": "./components.schema.json#/definitions/dataId"
               },
               "params": {
-                "$ref": "../components.schema.json#/definitions/params"
+                "$ref": "./components.schema.json#/definitions/params"
               }
             }
           }
