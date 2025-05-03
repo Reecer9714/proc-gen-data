@@ -1,4 +1,4 @@
-import { log, formatText, randomChoice } from "./utils.js";
+import { log, formatText, randomChoice, rollDice } from "./utils.js";
 import { ItemLoader, EntityLoader } from "./loaders.js";
 import { Entity } from "./Entity.js";
 import { updateUI } from "./ui.js";
@@ -21,6 +21,7 @@ export class Game {
     this.hero.weapon = null;
 
     this.enemy = new Entity("Training Dummy", 20);
+    this.lootDrops = [];
 
     this.hero.addItemsToInventory([
       dagger,
@@ -34,9 +35,34 @@ export class Game {
     this.hero.inventory.addItem(await ItemLoader.load("currency/gold"), 20);
   }
 
+  /**
+   * Generates loot based on the provided loot table.
+   * @param {Array<{item: string, quantity: string | number, chance: number}>} table
+   * @returns {Array<{item: Item, quantity: number}>}
+   */
+  generateLoot(table) {
+    const loot = table.reduce((acc, { item, quantity, chance }) => {
+      if (Math.random() < chance) {
+        acc.push({
+          item: item,
+          quantity: rollDice(quantity),
+        });
+      }
+      return acc;
+    }, []);
+    return loot;
+  }
+
   // Create a new enemy for the next round
   async resetRound() {
+    if (this.lootDrops.length) {
+      log("Enemy drops loot:");
+      this.lootDrops.forEach(({ item, quantity }) => {
+        log(`${quantity}x ${item}`);
+      });
+    }
     log("A new foe appears!");
+    this.lootDrops = []; // Reset loot drops for the next round
     const randomEnemy = await EntityLoader.load(randomChoice(this.enemies));
     this.enemy = new Entity(randomEnemy.name, randomEnemy.hp);
     if (randomEnemy.equipment) {
@@ -47,6 +73,12 @@ export class Game {
       randomEnemy.inventory.forEach(({ item, quantity }) => {
         this.enemy.inventory.addItem(item, quantity);
       });
+    }
+    if (randomEnemy.treasure) {
+      this.lootDrops.push(...(await this.generateLoot(randomEnemy.treasure)));
+    }
+    if (randomEnemy.harvest) {
+      this.lootDrops.push(...(await this.generateLoot(randomEnemy.harvest)));
     }
   }
 
@@ -78,7 +110,7 @@ export class Game {
     this.render();
   }
 
-  nextRound() {
+  async nextRound() {
     this.hero.tickEffects();
     this.enemy.tickEffects();
     if (this.hero.hp <= 0) {
@@ -86,8 +118,7 @@ export class Game {
     } else if (this.enemy.hp <= 0) {
       log("The enemy has been defeated!");
       // Create a new Target for the next round
-      const randomEnemy = randomChoice(this.enemies);
-      this.enemy = new Entity(randomEnemy.name, randomEnemy.hp);
+      await this.resetRound();
     } else {
       log("A new round has started!");
       // Choose a random actions up to the total cost of 2 for the target

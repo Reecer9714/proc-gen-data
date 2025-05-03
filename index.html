@@ -83,8 +83,8 @@
       await game.initialize();
       window.game = game; // For debugging
 
-      document.getElementById("reset-dummy").onclick = () => {
-        game.resetRound();
+      document.getElementById("reset-dummy").onclick = async () => {
+        await game.resetRound();
         game.render();
       };
       document.getElementById("next-round").onclick = () => game.nextRound();
