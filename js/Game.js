@@ -3,10 +3,8 @@ import { ItemLoader, EntityLoader } from "./loaders.js";
 import { Entity } from "./Entity.js";
 import { updateUI } from "./ui.js";
 
-export class Game {
-  constructor() {}
-
-  async initialize() {
+export class GameLoader {
+  static async load() {
     await Entity.initializeBaseActions();
     await ItemLoader.loadSimpleItems();
 
@@ -16,16 +14,11 @@ export class Game {
     const battleaxe = await ItemLoader.load("weapon/battleaxe");
     const arrow = await ItemLoader.load("ammo/arrow");
 
-    this.enemies = ["training_dummy", "goblin", "skeleton", "giant"];
+    const hero = new Entity("Hero", 10);
 
-    this.hero = new Entity("Hero", 10);
-    this.hero.attributes = { strength: 10 };
-    this.hero.weapon = null;
+    const enemy = new Entity("Training Dummy", 20);
 
-    this.enemy = new Entity("Training Dummy", 20);
-    this.lootDrops = [];
-
-    this.hero.addItemsToInventory([
+    hero.addItemsToInventory([
       dagger,
       dagger,
       staff,
@@ -33,8 +26,20 @@ export class Game {
       battleaxe,
       await ItemLoader.load("armor/leather"),
     ]); // Use Entity's method to add items
-    this.hero.inventory.addItem(arrow, 30);
-    this.hero.inventory.addItem(await ItemLoader.load("currency/gold"), 20);
+    hero.inventory.addItem(arrow, 30);
+    hero.inventory.addItem(await ItemLoader.load("currency/gold"), 20);
+
+    return new Game(hero, enemy);
+  }
+}
+
+export class Game {
+  enemies = ["training_dummy", "goblin", "skeleton", "giant"];
+  lootDrops = [];
+
+  constructor(hero, enemy) {
+    this.hero = hero;
+    this.enemy = enemy;
   }
 
   /**

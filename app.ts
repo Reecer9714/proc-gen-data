@@ -1,4 +1,4 @@
-import { Game } from "./js/Game.js";
+import { Game, GameLoader } from "./js/Game.js";
 
 // Extend the Window interface to include the 'game' property
 declare global {
@@ -8,8 +8,7 @@ declare global {
 }
 
 (async () => {
-  const game = new Game();
-  game.initialize();
+  const game = await GameLoader.load();
   window.game = game; // For debugging
 
   const resetDummyButton = document.getElementById("reset-dummy");
