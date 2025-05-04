@@ -76,20 +76,6 @@
     <div id="log"></div>
     <button id="next-round">Next Round</button>
 
-    <script type="module">
-      import { Game } from "./js/Game.js";
-
-      const game = new Game();
-      await game.initialize();
-      window.game = game; // For debugging
-
-      document.getElementById("reset-dummy").onclick = async () => {
-        await game.resetRound();
-        game.render();
-      };
-      document.getElementById("next-round").onclick = () => game.nextRound();
-
-      game.render();
-    </script>
+    <script type="module" src="./app.ts"></script>
   </body>
 </html>

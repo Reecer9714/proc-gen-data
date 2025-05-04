@@ -1,0 +1,19 @@
+{
+  "name": "proc-gen-data",
+  "version": "1.0.0",
+  "description": "Test project to define and test data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "lite-server": "^2.6.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.4"
+  }
+}
