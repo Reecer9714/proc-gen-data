@@ -1,5 +1,5 @@
 import { log, formatText, randomChoice, rollDice } from "./utils.js";
-import { ItemLoader, EntityLoader } from "./loaders.js";
+import { ItemLoader, EntityLoader } from "./loaders";
 import { Entity } from "./Entity.js";
 import { updateUI } from "./ui.js";
 
@@ -45,7 +45,6 @@ export class Game {
   /**
    * Generates loot based on the provided loot table.
    * @param {Array<{item: string, quantity: string | number, chance: number}>} table
-   * @returns {Array<{item: Item, quantity: number}>}
    */
   generateLoot(table) {
     const loot = table.reduce((acc, { item, quantity, chance }) => {
@@ -75,19 +74,49 @@ export class Game {
       randomEnemy.name,
       `${randomEnemy.level}${randomEnemy.hd}`
     );
-    if (randomEnemy.equipment) {
-      this.enemy.addItemsToInventory(randomEnemy.equipment);
-      this.enemy.weapon = randomChoice(randomEnemy.equipment);
+    if (randomEnemy.loadouts) {
+      const randomLoadout = randomChoice(randomEnemy.loadouts);
+      // combine with root equipment and inventory, they may be undefined initially
+      randomEnemy.equipment = [
+        ...randomEnemy.equipment,
+        ...(await Promise.all(
+          randomLoadout.equipment.map(
+            async (itemId) => await ItemLoader.load(itemId)
+          )
+        )),
+      ];
+      if (randomLoadout.inventory?.length) {
+        randomEnemy.inventory = [
+          ...randomEnemy.inventory,
+          ...(await Promise.all(
+            randomLoadout.inventory.map(async ({ item, quantity }) => ({
+              item: await ItemLoader.load(item),
+              quantity: quantity,
+            }))
+          )),
+        ];
+      }
     }
-    if (randomEnemy.inventory) {
+    if (randomEnemy.equipment?.length) {
+      this.enemy.addItemsToInventory(randomEnemy.equipment);
+      const randomWeapon = randomChoice(
+        randomEnemy.equipment.filter(({ id }) => id.includes("weapon"))
+      );
+      const randomArmor = randomChoice(
+        randomEnemy.equipment.filter(({ id }) => id.includes("armor"))
+      );
+      if (randomWeapon) this.enemy.equipItem("weapon", randomWeapon);
+      if (randomArmor) this.enemy.equipItem("armor", randomArmor);
+    }
+    if (randomEnemy.inventory?.length) {
       randomEnemy.inventory.forEach(({ item, quantity }) => {
-        this.enemy.inventory.addItem(item, quantity);
+        this.enemy.inventory.addItem(item, rollDice(quantity));
       });
     }
-    if (randomEnemy.treasure) {
+    if (randomEnemy.treasure?.length) {
       this.lootDrops.push(...(await this.generateLoot(randomEnemy.treasure)));
     }
-    if (randomEnemy.harvest) {
+    if (randomEnemy.harvest?.length) {
       this.lootDrops.push(...(await this.generateLoot(randomEnemy.harvest)));
     }
   }

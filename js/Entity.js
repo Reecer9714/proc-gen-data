@@ -1,5 +1,5 @@
 import { log, formatText, randomChoice, rollDice } from "./utils.js";
-import { ActionLoader } from "./loaders.js";
+import { ActionLoader } from "./loaders";
 import { Inventory } from "./Inventory.js";
 
 class EquipmentSlot {
